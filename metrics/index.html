@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Metrics - Lockbox Extension</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  <link href="../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Metrics";
+    var mkdocs_page_input_path = "metrics.md";
+    var mkdocs_page_url = "/metrics/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Lockbox Extension</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Introduction</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../release-notes/">Release Notes</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../faqs/">FAQs</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../contributing/">Contribute</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../install/">Source Code</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Metrics</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#lockbox-metrics-plan">Lockbox Metrics Plan</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#analysis">Analysis</a></li>
+        
+            <li><a class="toctree-l3" href="#collection">Collection</a></li>
+        
+            <li><a class="toctree-l3" href="#metrics-overview">Metrics Overview</a></li>
+        
+            <li><a class="toctree-l3" href="#non-event-metrics">Non-Event Metrics</a></li>
+        
+            <li><a class="toctree-l3" href="#list-of-events-currently-recorded">List of Events Currently Recorded</a></li>
+        
+            <li><a class="toctree-l3" href="#list-of-planned-events">List of Planned Events</a></li>
+        
+            <li><a class="toctree-l3" href="#references">References</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Lockbox Extension</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Metrics</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/mozilla-lockbox/lockbox-extension/edit/master/docs/metrics.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lockbox-metrics-plan">Lockbox Metrics Plan</h1>
+<p><em>Last Updated: Nov 28, 2017</em></p>
+<!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+<ul>
+<li><a href="#analysis">Analysis</a></li>
+<li><a href="#collection">Collection</a><ul>
+<li><a href="#event-registration-and-recording">Event Registration and Recording</a></li>
+</ul>
+</li>
+<li><a href="#metrics-overview">Metrics Overview</a></li>
+<li><a href="#non-event-metrics">Non-Event Metrics</a></li>
+<li><a href="#list-of-events-currently-recorded">List of Events Currently Recorded</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+<!-- /TOC -->
+
+<p>This is the metrics collection plan for Lockbox's alpha release. It documents all events currently collected through telemetry, as well those planned for collection but not currently implemented. It will be updated to reflect all new and planned data collection.</p>
+<h2 id="analysis">Analysis</h2>
+<p>Data collection is done solely for the purpose of product development, improvement and maintenance. We are particularly interested in data that will help us answer the following questions.</p>
+<ul>
+<li>Do people Save Passwords in Lockbox?<ul>
+<li>How many? (measured by count of items saved per user)</li>
+<li>How often? (number of credentials saved per user per time interval)</li>
+</ul>
+</li>
+<li>Do people create their own passwords or use Lockbox to generate them?<ul>
+<li>Ratio: (Number of times the PW generator is used when storing an item) / (number of credentials stored)</li>
+</ul>
+</li>
+<li>Do people use the passwords they store on Lockbox?<ul>
+<li>How many times (per some unit of time) do stored credentials get auto-filled or copied to the clipboard?</li>
+<li>How many times do users click to reveal a password?</li>
+</ul>
+</li>
+<li>How well does does auto-filling credentials work <strong>(not in alpha)</strong>?<ul>
+<li>When credentials are auto-filled, are they filled into the correct fields?</li>
+<li>How often must the user make a change to what fields were filled?<ul>
+<li>How to measure these things??? is there an easier way than just asking if the auto-fill didn't work?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Do people continue to use Lockbox after first use?<ul>
+<li>Out of those who install, how many use it more than once?</li>
+</ul>
+</li>
+<li>Where are the drop-off points in the user flow?<ul>
+<li>Do the majority of people make it all the way through the setup process?</li>
+<li>Once initially setup, do people continue to add credentials?</li>
+</ul>
+</li>
+<li>What are people's opinions on LB<ul>
+<li>Feedback forms</li>
+</ul>
+</li>
+<li>Do people sync their passwords <strong>(not in alpha)</strong>?<ul>
+<li>How does syncing affect engagement?</li>
+</ul>
+</li>
+<li>What type of sites do people use Lockbox with?<ul>
+<li>Do they use Lockbox only for their most sensitive accounts?</li>
+</ul>
+</li>
+</ul>
+<h2 id="collection">Collection</h2>
+<p><strong>Note:</strong> <em>This is the collection plan for our internal alpha release. For our beta release will be taking advantage of test pilot's telemetry API. The metrics plan for beta will be described in a separate document.</em></p>
+<p>At this point, all measurements related to Lockbox will be made client-side. However, future releases will give users the option to sync their Lockbox data via an FxA account, at which point additional measurements will be logged server-side through the FxA data pipeline. We are not directly responsible for the measurements made through that mechanism.</p>
+<p>For our internal alpha release, we will be making use of the public JavaScript API that allows recording and sending of event data through an add-on. <strong>This means that for our alpha release we will only be collecting event-based data</strong>. The API is documented here:</p>
+<p>https://firefox-source-docs.mozilla.org/toolkit/components/telemetry/telemetry/collection/events.html#the-api</p>
+<p>Once the events are logged in the client they should appear in <a href="about:telemetry">about:telemetry</a>. From there they will be submitted in the main ping payload under <code>processes.dynamic.events</code> and available through the usual services (STMO and ATMO), as well as amplitude.</p>
+<h3 id="event-registration-and-recording">Event Registration and Recording</h3>
+<p>The events that we will record will conform to the structure expected by the telemetry pipeline. When the events are logged in telemetry they will be a list of:</p>
+<p><code>[timestamp, category, method, object, value, extra]</code></p>
+<p>The API takes care of the timestamp for us. We just need to define <code>category</code>, <code>method</code>, <code>object</code> and <code>extra</code> (<code>value</code> is optional and we won't use it).</p>
+<p>Because we are using the API through an add-on it <strong>isn't</strong> necessary that we include an events.yaml file.</p>
+<p>Instead we will define our events by <strong>registering</strong> them using a call to <code>Services.telemetry.registerEvents(category, eventData)</code>.</p>
+<p>Here's a breakdown of how a to register a typical event:</p>
+<pre><code class="javascript">Services.telemetry.registerEvents(&quot;event_category&quot;, {
+    &quot;event_name&quot;: {
+        methods: [&quot;click&quot;, ... ], // types of events that can occur
+        objects: [&quot;a_button&quot;, ... ], // objects event can occur on
+        extra: {&quot;key&quot;: &quot;value&quot;, ... } // key-value pairs (strings)
+    }
+</code></pre>
+
+<p>For our purposes, we will use the <code>extra</code> field for a few purposes:</p>
+<ul>
+<li>To log the FxA user id of the client logging the event (e.g. <code>"fxauid": uid</code>)</li>
+<li>To log the UUID of the item that has been added or changed (e.g. <code>"item_id": UUID</code>)</li>
+<li>To log the fields that are modified when an item is updated in the datastore (e.g. <code>"fields": "password,notes"</code>  (because the value has to be a string we will have to concat the fields that were updated somehow)</li>
+</ul>
+<p>Once an event is registered, we can record it with:</p>
+<p><code>Services.telemetry.recordEvent(category, method, object, null, extra)</code></p>
+<p>When recording, we can use <code>null</code> for <code>value</code>.</p>
+<p>See the Events section for specific examples of event registration and recording.</p>
+<h2 id="metrics-overview">Metrics Overview</h2>
+<p>(this section may redundant with analysis section)
+For alpha, we'd like to (ideally) like to be able to track the following general categories of things:</p>
+<ul>
+<li>The setup flow, so we can know at what points (if any) people quit the flow before finishing it</li>
+<li>Top-level interactions centered around use of the Lockbox toolbar icon. This includes interactions within the initial doorhanger that is displayed when the user clicks the icon.</li>
+<li>Interactions with the list of the user's Lockbox items (credentials)</li>
+<li>Interactions with the add / modify dialogs used to enter / edit item information</li>
+<li>Changes to the datastore that actually contains the user's items, in addition to user actions that lead to those changes</li>
+<li>When the user submits feedback about Lockbox</li>
+<li>Usage of the copy and reveal functions for stored Lockbox items.</li>
+</ul>
+<p>Each of these are described below within their own Events subsection.</p>
+<h2 id="non-event-metrics">Non-Event Metrics</h2>
+<p>These are the metrics we plan to collect regarding the state of user datastores. Note that we won't be able to record these directly for alpha. We will have to infer them from the event data.</p>
+<ul>
+<li>
+<p><code>n_items</code> The number of credentials that exist in the user's datastore. Integer</p>
+</li>
+<li>
+<p><code>n_notes</code> The number of items for which the user has manually entered custom notes for. Integer</p>
+</li>
+<li>
+<p><code>timestamp_last</code> The timestamp of the last edit the user made to the datastore. Does not necessarily correspond to the last time they opened the CRUD editor.</p>
+</li>
+<li>
+<p><code>n_uses</code> The number of times a user copied or auto-filled a Lockbox item.</p>
+</li>
+</ul>
+<h2 id="list-of-events-currently-recorded">List of Events Currently Recorded</h2>
+<p>All events are currently implemented under the <strong>category: lockboxV0</strong>. The <code>extra</code> field always contains <code>fxauid</code> where possible (i.e. after FxA auth). For events pertaining to a particular Lockbox item, <code>itemid</code> is also included. They are listed and grouped together based on the contents of the event's <code>method</code> field.</p>
+<ol>
+<li>
+<p><code>startup</code> fires when the webextension is loaded. <strong>objects</strong>: webextension. Note that this event fires whenever the browser is started, so is not indicative of direct user interaction with Lockbox.</p>
+</li>
+<li>
+<p><code>iconClick</code> fires when someone clicks the toolbar icon. <strong>objects</strong>: toolbar</p>
+</li>
+<li>
+<p><code>render</code> events fire when the firstrun view (showing the initial Lockbox setup form), item manager or doorhanger (when implemented) are rendered. <strong>objects</strong>: firstrun, manage, doorhanger</p>
+</li>
+<li>
+<p><code>itemAdding</code>, <code>itemUpdating</code>, <code>itemDeleting</code> fire when a user clicks to submit a new item or edit or delete an existing item. <strong>objects</strong>: addItemForm, updatingItemForm</p>
+</li>
+<li>
+<p><code>itemAdded</code>, <code>itemUpdated</code>, <code>itemDeleted</code> fire after a successful add/update/delete action. <strong>objects</strong>: addItemForm, updatingItemForm</p>
+</li>
+<li>
+<p><code>added</code>, <code>updated</code>, <code>deleted</code> fire when an item is added/updated/deleted in the backend datastore. Has itemid in the extra field. <strong>objects</strong>: datastore</p>
+</li>
+<li>
+<p><code>itemSelected</code> fires when a user clicks an item in the itemlist. <strong>objects</strong> itemList  </p>
+</li>
+<li>
+<p><code>usernameCopied</code> and <code>passwordCopied</code> fire when a user copies their username or password from an item. <strong>objects</strong>: itemDetails</p>
+</li>
+<li>
+<p><code>feedbackClick</code> fires when the user clicks the "Send Feedback" button. <strong>objects</strong>: manage</p>
+</li>
+<li>
+<p><code>faqClick</code> fires when the user clicks the "FAQ" button. <strong>objects</strong>: manage</p>
+</li>
+<li>
+<p><code>resetRequested</code> fires when the user clicks the "Reset" button in the Lockbox settings. <strong>objects</strong>: settings</p>
+</li>
+<li>
+<p><code>resetCompleted</code> fires when the user completes a reset of their Lockbox data in the Lockbox settings. <strong>objects</strong>: settings</p>
+</li>
+</ol>
+<h2 id="list-of-planned-events">List of Planned Events</h2>
+<p>These events will be implemented once the corresponding functionality is available.</p>
+<ol>
+<li>
+<p><code>fxaSignIn</code> fires when someone clicks the signin button during firstrun. <strong>objects</strong>: fxaSignInPage.</p>
+</li>
+<li>
+<p><code>confirmPW</code> fires when the user clicks the button to confirm their FxA pw. <strong>objects</strong>: confirmPWButton</p>
+</li>
+<li>
+<p><code>doorhangerItemSelected</code> fires when a user clicks an item in the doorhanger's itemlist. <strong>objects</strong> doorhanger  </p>
+</li>
+<li>
+<p><code>doorhangerItemCopied</code> fires when a user copies an item's username/password from the doorhanger's entry view. <strong>objects</strong> doorhangerEntryDetails.  </p>
+</li>
+<li>
+<p><code>doorhangerAddClick</code> fires when the user clicks to add a new entry from the doorhanger. <strong>objects</strong> doorhanger  </p>
+</li>
+</ol>
+<hr />
+<h2 id="references">References</h2>
+<p>Docs for the Public JS API that allows us to log events thru an add-on:</p>
+<p>https://firefox-source-docs.mozilla.org/toolkit/components/telemetry/telemetry/collection/events.html#the-api</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../install/" class="btn btn-neutral" title="Source Code"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/mozilla-lockbox/lockbox-extension/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../install/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>
