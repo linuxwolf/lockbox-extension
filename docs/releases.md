@@ -20,31 +20,33 @@ Before a release can be made, the following must be done:
 
 To generate the next release binary:
 
-1. Update "version" in package.json (and package-lock.json)
-    - we follow the [semver](http://semver.org/) syntax
-    - _Alpha_ releases will be labeled with "-alpha" (e.g., "0.1.0-alpha")
-    - _Beta_ releases will be labeled with "-beta" (e.g., "1.0.0-beta")
-    - _Stable_ releases will **not** be labeled, and follow semver from the last Beta release (e.g., "1.0.0")
+1. Update "version" in `package.json` (and `package-lock.json`)
+    - we follow the [semver] syntax:
+        - _Alpha_ releases will be labeled with "-alpha" (e.g., "0.1.0-alpha")
+        - _Beta_ releases will be labeled with "-beta" (e.g., "1.0.0-beta")
+        - _Stable_ releases will **not** be labeled, and follow semver from the last Beta release (e.g., "1.0.0")
 2. Update `docs/release-notes.md`:
     - latest release is at the top, under a second-level header
     - each release includes the sub headings "What's New", "What's Fixed", and "Known Issues"
     - consult with Product Management on wording if needed
-2. Commit and ultimately merge to `master` branch
-3. Create a pull request on GitHub [comparing changes from the `master` branch against/to `production`][production-compare]
+3. Commit and ultimately merge to `master` branch
+4. Create a pull request on GitHub [comparing changes from the `master` branch against/to `production`][production-compare]
     - Open the pull request so we can show the changes, CI status, and approvals
       - Request an approval from the P.I. and Product representatives
     - Once the release has been reviewed, tested, and approved to go live, merge and close the pull request
     - Test Pilot's Jenkins will then build, sign, and deploy the extension (see ["Extension Signing"](#extension-signing))
-4. Tag the latest commit on `production` branch with an annotated version and push the tag:
-    - `git tag -a -m "Release 0.1.0" 0.1.0`
-    - `git push upstream 0.1.0`
+5. Tag the latest commit on `production` branch with an annotated version and push the tag:
+    - `git checkout production`
+    - `git pull upstream production`
+    - `git tag -a -m "Release 0.1.0-alphpa" 0.1.0-alpha`
+    - `git push upstream 0.1.0-alpha`
     - Travis-CI will build and generate a [GitHub Release][releases]
-7. Edit the resulting GitHub Release
+6. Edit the resulting GitHub Release
     - Set the [GitHub Release][releases] title to match the version
     - Set the GitHub Release notes to match the `docs/release-notes.md`
     - Download the signed add-on: `wget -O signed-addon.xpi https://testpilot.firefox.com/files/lockbox@mozilla.com/latest`
     - Attach to the GitHub Release the downloaded signed add-on
-8. Send an announcement to the team (e.g., via Slack team channel)
+7. Send an announcement to the team (e.g., via Slack team channel)
 
 ## Extension Signing
 
@@ -64,3 +66,4 @@ The resulting files deployed are:
 
 [production-compare]: https://github.com/mozilla-lockbox/lockbox-extension/compare/production...master
 [releases]: https://github.com/mozilla-lockbox/lockbox-extension/releases
+[semver]: https:/semver.org
